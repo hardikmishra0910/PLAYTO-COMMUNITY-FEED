@@ -257,46 +257,46 @@ def user_karma(request, user_id=None):
 @permission_classes([AllowAny])
 def register_user(request):
     """Register a new user"""
-    username = request.data.get('username')
-    email = request.data.get('email')
-    password = request.data.get('password')
-    first_name = request.data.get('first_name', '')
-    last_name = request.data.get('last_name', '')
-    
-    # Validation
-    if not username or not email or not password:
-        return Response({
-            'error': 'Username, email, and password are required'
-        }, status=status.HTTP_400_BAD_REQUEST)
-    
-    if len(password) < 6:
-        return Response({
-            'error': 'Password must be at least 6 characters long'
-        }, status=status.HTTP_400_BAD_REQUEST)
-    
-    if User.objects.filter(username=username).exists():
-        return Response({
-            'error': 'Username already exists'
-        }, status=status.HTTP_400_BAD_REQUEST)
-    
-    if User.objects.filter(email=email).exists():
-        return Response({
-            'error': 'Email already exists'
-        }, status=status.HTTP_400_BAD_REQUEST)
-    
-    # Validate username format
-    if not username.replace('_', '').replace('-', '').isalnum():
-        return Response({
-            'error': 'Username can only contain letters, numbers, hyphens, and underscores'
-        }, status=status.HTTP_400_BAD_REQUEST)
-    
-    if len(username) < 3:
-        return Response({
-            'error': 'Username must be at least 3 characters long'
-        }, status=status.HTTP_400_BAD_REQUEST)
-    
-    # Create user
     try:
+        username = request.data.get('username')
+        email = request.data.get('email')
+        password = request.data.get('password')
+        first_name = request.data.get('first_name', '')
+        last_name = request.data.get('last_name', '')
+        
+        # Validation
+        if not username or not email or not password:
+            return Response({
+                'error': 'Username, email, and password are required'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        if len(password) < 6:
+            return Response({
+                'error': 'Password must be at least 6 characters long'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        if User.objects.filter(username=username).exists():
+            return Response({
+                'error': 'Username already exists'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        if User.objects.filter(email=email).exists():
+            return Response({
+                'error': 'Email already exists'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Validate username format
+        if not username.replace('_', '').replace('-', '').isalnum():
+            return Response({
+                'error': 'Username can only contain letters, numbers, hyphens, and underscores'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        if len(username) < 3:
+            return Response({
+                'error': 'Username must be at least 3 characters long'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Create user
         user = User.objects.create_user(
             username=username,
             email=email,
@@ -319,7 +319,7 @@ def register_user(request):
         
     except Exception as e:
         return Response({
-            'error': 'Failed to create user'
+            'error': f'Registration failed: {str(e)}'
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
