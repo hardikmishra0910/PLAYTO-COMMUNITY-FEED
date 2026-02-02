@@ -7,6 +7,20 @@ A modern, production-quality social media platform built with Django REST Framew
 ![React](https://img.shields.io/badge/React-18.0-blue)
 ![Python](https://img.shields.io/badge/Python-3.8+-yellow)
 
+## 📱 Application Screenshots
+
+### 1. Main Dashboard with Leaderboard
+![Main Dashboard](screenshots/01-main-dashboard.png)
+*Complete view showing post creation, recent posts, and the karma leaderboard with top contributors*
+
+### 2. Post with Image Upload
+![Post with Image](screenshots/02-post-with-image.png)
+*User post featuring an uploaded image with like count and comment interactions*
+
+### 3. Threaded Comments System
+![Comments Modal](screenshots/03-comments-modal.png)
+*Modal view displaying the Reddit-style threaded commenting system with nested replies and user interactions*
+
 ## ✨ Features
 
 ### 🚀 Core Functionality
